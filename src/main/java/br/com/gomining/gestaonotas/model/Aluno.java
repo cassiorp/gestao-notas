@@ -1,9 +1,6 @@
 package br.com.gomining.gestaonotas.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,10 +10,11 @@ import java.util.List;
 @Document(collection = "alunos")
 
 @NoArgsConstructor
+@ToString
 public class Aluno {
 
     @Id
-    @Getter
+    @Getter @Setter
     private String id;
 
     @Getter @Setter
@@ -35,4 +33,6 @@ public class Aluno {
     public void setNotas(Nota nota) {
         this.notas.add(nota);
     }
+
+
 }

@@ -16,13 +16,11 @@ import java.util.List;
 public class AlunoController {
 
     private final AlunoService alunoService;
-    private final ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Aluno salvaAluno(@RequestBody AlunoDTO alunoDTO) {
-        Aluno aluno = modelMapper.map(alunoDTO, Aluno.class);
-        return this.alunoService.salvaAluno(aluno);
+        return this.alunoService.salvaAluno(alunoDTO);
     }
 
     @GetMapping
