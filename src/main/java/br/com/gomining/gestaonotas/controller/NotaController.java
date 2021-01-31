@@ -17,17 +17,17 @@ public class NotaController {
     private final NotaServiceImpl notaServiceImpl;
 
     @PostMapping("/{idCliente}")
-    public Nota salvaNota(@PathVariable String idCliente, @RequestBody @Valid NotaDTO notaDTO) {
+    public Nota salvaNota(@PathVariable @Valid String idCliente, @RequestBody @Valid NotaDTO notaDTO) {
         return this.notaServiceImpl.salvaNota(idCliente, notaDTO);
     }
 
     @PatchMapping("/{id}")
-    public Nota editaNotaTotal(@PathVariable String id, @RequestBody NotaTotalDTO notaTotalDTO) {
+    public Nota editaNotaTotal(@PathVariable @Valid String id, @RequestBody @Valid NotaTotalDTO notaTotalDTO) {
         return this.notaServiceImpl.editaNotaTotal(id, notaTotalDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteNota(@PathVariable String id) {
+    public void deleteNota(@PathVariable @Valid String id) {
         this.notaServiceImpl.deletaNota(id);
     }
 
