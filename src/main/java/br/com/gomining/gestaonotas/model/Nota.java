@@ -2,22 +2,21 @@ package br.com.gomining.gestaonotas.model;
 
 
 import br.com.gomining.gestaonotas.model.Enum.Situacao;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Document(collection = "notas")
 public class Nota {
 
     @Id
+    @Getter
     private String id;
 
     private String disciplina;
