@@ -1,10 +1,10 @@
 package br.com.gomining.gestaonotas.controller;
 
 import br.com.gomining.gestaonotas.dto.NotaDTO;
+import br.com.gomining.gestaonotas.dto.NotaTotalDTO;
 import br.com.gomining.gestaonotas.model.Nota;
 import br.com.gomining.gestaonotas.service.NotaService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,12 +15,20 @@ import javax.validation.Valid;
 public class NotaController {
 
     private final NotaService notaService;
-    private final ModelMapper modelMapper;
 
-    @PostMapping("/{id}")
-    public Nota salvaNota(@PathVariable String id, @RequestBody @Valid NotaDTO notaDTO) {
-        Nota nota = modelMapper.map(notaDTO, Nota.class);
-        return this.notaService.salvaNota(id, nota);
+    @PostMapping("/{idCliente}")
+    public Nota salvaNota(@PathVariable String idCliente, @RequestBody @Valid NotaDTO notaDTO) {
+        return this.notaService.salvaNota(idCliente, notaDTO);
+    }
+
+    @PatchMapping("/{id}")
+    public Nota editaNotaTotal(@PathVariable String id, @RequestBody NotaTotalDTO notaTotalDTO) {
+        return this.notaService.editaNotaTotal(id, notaTotalDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteNota(@PathVariable String id) {
+        this.notaService.deletaNota(id);
     }
 
 }
