@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "alunos")
-
 @NoArgsConstructor
 @ToString
 public class Aluno {
@@ -21,17 +20,22 @@ public class Aluno {
     private String nome;
 
     @Getter
-    private List<Nota> notas = new ArrayList<>();
+    private List<Nota> boletim = new ArrayList<>();
 
     @Builder
-    public Aluno(String id, String nome, List<Nota> notas) {
+    public Aluno(String id, String nome, List<Nota> boletim) {
         this.id = id;
         this.nome = nome;
-        this.notas = new ArrayList<>();
+        this.boletim = new ArrayList<>();
     }
 
-    public void setNotas(Nota nota) {
-        this.notas.add(nota);
+    public void setBoletim(Nota nota) {
+        this.boletim.add(nota);
+    }
+
+    public void setBoletim(List<Nota> notas) {
+        this.boletim.removeAll(boletim);
+        this.boletim.addAll(notas);
     }
 
 

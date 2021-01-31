@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
+@ToString
 @NoArgsConstructor
 @Document(collection = "notas")
 public class Nota {
@@ -32,12 +33,13 @@ public class Nota {
     private LocalDate date;
 
     @Builder
-    public Nota(String disciplina, String nomeAluno, Double notaTotal, Situacao situacao, LocalDate date) {
+
+    public Nota(String id, String disciplina, String nomeAluno, Double notaTotal, Situacao situacao, LocalDate date) {
+        this.id = id;
         this.disciplina = disciplina;
         this.nomeAluno = nomeAluno;
         this.notaTotal = notaTotal;
-        this.date = date;
         this.situacao = situacao;
+        this.date = date;
     }
-
 }

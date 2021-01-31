@@ -30,7 +30,7 @@ public class AlunoTest {
 
         assertEquals("id1", aluno.getId());
         assertEquals("Cássio", aluno.getNome());
-        assertEquals(listaVazia, aluno.getNotas());
+        assertEquals(listaVazia, aluno.getBoletim());
     }
 
 
@@ -40,7 +40,7 @@ public class AlunoTest {
         Aluno aluno = Aluno.builder()
                 . id("id1")
                 .nome("Cássio")
-                .notas(notas)
+                .boletim(notas)
                 .build();
 
         when(notas.size()).thenReturn(5);

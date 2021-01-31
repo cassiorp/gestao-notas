@@ -38,7 +38,6 @@ public class AlunoServiceTest {
     @Test
     @DisplayName("Deve Criar Aluno")
     public void deveCriarAlunoDTO() {
-        Aluno stub = Aluno.builder().nome("Cássio").build();
         Aluno retorno = Aluno.builder().nome("Cássio").build();
 
         AlunoDTO alunoDTO = new AlunoDTO("Cássio");
@@ -51,7 +50,7 @@ public class AlunoServiceTest {
 
 
     @Test
-    @DisplayName("Deve Buscar todos alunos")
+    @DisplayName("Deve Buscar Todos Alunos")
     public void deveBuscarTodosAlunos() {
 
         List<Aluno> alunosRetorno = listAlunos();
@@ -64,7 +63,7 @@ public class AlunoServiceTest {
     }
 
     @Test
-    @DisplayName("Deve Buscar Aluno por ID")
+    @DisplayName("Deve Buscar Aluno Por ID")
     public void deveBuscarAlunoPorId() {
 
         Aluno retorno = Aluno.builder().nome("Cássio").build();
@@ -83,11 +82,10 @@ public class AlunoServiceTest {
         NomeDTO nomeDTO = new NomeDTO();
         nomeDTO.setNome("novo nome");
 
-        Aluno stub = Aluno.builder().id("id").nome("Cássio").build();
         Aluno retorno = Aluno.builder().id("id").nome(nomeDTO.getNome()).build();
 
         when(alunoRepository.findById("id")).thenReturn(Optional.ofNullable((retorno)));
-        when(alunoRepository.save(anyObject())).thenReturn(retorno);
+        when(alunoRepository.save(any(Aluno.class))).thenReturn(retorno);
 
         Aluno editado = this.alunoService.editaNomeAluno("id", nomeDTO);
 
@@ -96,14 +94,14 @@ public class AlunoServiceTest {
 
 
     @Test
-    @DisplayName("Deve lançar exceção para aluno não encontrado")
+    @DisplayName("Deve Lançar Exceção Para Aluno não Encontrado")
     public void deveLancarExcecaoParaClienteNaoEncontrado(){
         assertThrows(AlunoNotFoundException.class,
                 ()->{ this.alunoService.buscaAlunoPorId("id"); });
     }
 
     @Test
-    @DisplayName("Deve Deletar Aluno por ID")
+    @DisplayName("Deve Deletar Aluno Por ID")
     public void deveDeletarAlunoPorID() {
         Aluno retorno = Aluno.builder().id("id").nome("Cássio").build();
 
@@ -112,10 +110,6 @@ public class AlunoServiceTest {
 
         verify(alunoRepository, times(1)).deleteById("id");
     }
-
-
-
-
 
 
     public List<Aluno> listAlunos() {
