@@ -2,8 +2,12 @@ package br.com.gomining.gestaonotas.service;
 
 import br.com.gomining.gestaonotas.dto.AlunoDTO;
 import br.com.gomining.gestaonotas.dto.NomeDTO;
+import br.com.gomining.gestaonotas.dto.NotaDTO;
 import br.com.gomining.gestaonotas.exception.AlunoNotFoundException;
+import br.com.gomining.gestaonotas.exception.NotaNotFoundException;
 import br.com.gomining.gestaonotas.model.Aluno;
+import br.com.gomining.gestaonotas.model.Enum.Situacao;
+import br.com.gomining.gestaonotas.model.Nota;
 import br.com.gomining.gestaonotas.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,6 +26,10 @@ public class AlunoService {
 
     public Aluno salvaAluno(AlunoDTO alunoDTO) {
         Aluno aluno = Aluno.builder().nome(alunoDTO.getNome()).build();
+        return this.alunoRepository.save(aluno);
+    }
+
+    public Aluno salvaAluno(Aluno aluno) {
         return this.alunoRepository.save(aluno);
     }
 
@@ -48,4 +56,12 @@ public class AlunoService {
         }
         return false;
     }
+
+    public Nota buscaNotaNoBoletin(Aluno aluno, String id) {
+        return  aluno.getBoletim().stream()
+                .filter(n -> n.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new NotaNotFoundException("Nota não encontrada"));
+    }
+
 }
