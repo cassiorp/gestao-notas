@@ -2,9 +2,8 @@ package br.com.gomining.gestaonotas.controller;
 
 import br.com.gomining.gestaonotas.dto.AlunoDTO;
 import br.com.gomining.gestaonotas.dto.NomeDTO;
-import br.com.gomining.gestaonotas.dto.NotaDTO;
 import br.com.gomining.gestaonotas.model.Aluno;
-import br.com.gomining.gestaonotas.service.AlunoService;
+import br.com.gomining.gestaonotas.service.impl.AlunoServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,32 +15,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AlunoController {
 
-    private final AlunoService alunoService;
+    private final AlunoServiceImpl alunoServiceImpl;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Aluno salvaAluno(@RequestBody AlunoDTO alunoDTO) {
-        return this.alunoService.salvaAluno(alunoDTO);
+        return this.alunoServiceImpl.salvaAluno(alunoDTO);
     }
 
     @GetMapping
     public List<Aluno> buscaAlunos() {
-        return this.alunoService.buscaAlunos();
+        return this.alunoServiceImpl.buscaAlunos();
     }
 
     @GetMapping("/{id}")
     public Aluno buscaAluno(@PathVariable String id) {
-        return this.alunoService.buscaAlunoPorId(id);
+        return this.alunoServiceImpl.buscaAlunoPorId(id);
     }
 
     @PatchMapping("/{id}")
     public Aluno editaNomeAluno(@PathVariable String id, @RequestBody NomeDTO nomeDTO) {
-        return this.alunoService.editaNomeAluno(id, nomeDTO);
+        return this.alunoServiceImpl.editaNomeAluno(id, nomeDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deletaAluno(@PathVariable String id) {
-        this.alunoService.deletaAluno(id);
+        this.alunoServiceImpl.deletaAluno(id);
     }
 
 }

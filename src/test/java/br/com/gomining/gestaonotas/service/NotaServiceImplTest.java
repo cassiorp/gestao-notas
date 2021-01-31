@@ -1,21 +1,20 @@
 package br.com.gomining.gestaonotas.service;
 
-import br.com.gomining.gestaonotas.dto.NomeDTO;
 import br.com.gomining.gestaonotas.dto.NotaDTO;
-import br.com.gomining.gestaonotas.dto.NotaTotalDTO;
-import br.com.gomining.gestaonotas.exception.AlunoNotFoundException;
 import br.com.gomining.gestaonotas.exception.NotaNotFoundException;
 import br.com.gomining.gestaonotas.model.Aluno;
 import br.com.gomining.gestaonotas.model.Enum.Situacao;
 import br.com.gomining.gestaonotas.model.Nota;
-import br.com.gomining.gestaonotas.repository.AlunoRepository;
 import br.com.gomining.gestaonotas.repository.NotaRepository;
+import br.com.gomining.gestaonotas.service.impl.AlunoServiceImpl;
+import br.com.gomining.gestaonotas.service.impl.NotaServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import java.time.LocalDate;
@@ -26,17 +25,22 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
-@ExtendWith(MockitoExtension.class)
-public class NotaServiceTest {
+@ExtendWith(SpringExtension.class)
+public class NotaServiceImplTest {
 
-    @Mock
+    NotaService notaService;
+
+    @MockBean
     NotaRepository notaRepository;
 
-    @Mock
-    AlunoService alunoService;
+    @MockBean
+    AlunoServiceImpl alunoService;
 
-    @InjectMocks
-    NotaService notaService;
+    @BeforeEach
+    public void init(){
+        this.notaService = new NotaServiceImpl(notaRepository, alunoService);
+    }
+
 
     @Test
     @DisplayName("Deve Salvar Nota")

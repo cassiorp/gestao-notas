@@ -6,12 +6,13 @@ import br.com.gomining.gestaonotas.dto.NomeDTO;
 import br.com.gomining.gestaonotas.exception.AlunoNotFoundException;
 import br.com.gomining.gestaonotas.model.Aluno;
 import br.com.gomining.gestaonotas.repository.AlunoRepository;
+import br.com.gomining.gestaonotas.service.impl.AlunoServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import java.util.Arrays;
@@ -21,19 +22,21 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.Mockito.*;
 
 
-@ExtendWith(MockitoExtension.class)
-public class AlunoServiceTest {
+@ExtendWith(SpringExtension.class)
+public class AlunoServiceImplTest {
 
-    @Mock
-    AlunoRepository alunoRepository;
-
-    @InjectMocks
     AlunoService alunoService;
 
+    @MockBean
+    AlunoRepository alunoRepository;
+
+    @BeforeEach
+    public void init(){
+        this.alunoService = new AlunoServiceImpl(alunoRepository);
+    }
 
     @Test
     @DisplayName("Deve Criar Aluno")
