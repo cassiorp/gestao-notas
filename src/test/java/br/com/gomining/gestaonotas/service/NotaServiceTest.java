@@ -12,12 +12,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,7 +66,6 @@ public class NotaServiceTest {
     @Test
     @DisplayName("Deve Buscar Nota Por ID")
     public void deveBuscarNotaPorID() {
-
         Nota notaRetorno = notaEntity();
 
         when(notaRepository.findById("id")).thenReturn(Optional.ofNullable(notaRetorno));
@@ -73,6 +73,18 @@ public class NotaServiceTest {
         Nota notaBuscada = this.notaService.buscaNotaPorID("id");
         assertEquals(notaRetorno, notaBuscada);
         assertNotNull(notaBuscada);
+    }
+
+    @Test
+    @DisplayName("Deve Buscar Todas as Notas")
+    public void deveBuscarTodasNotas() {
+        List<Nota> retorno = listNotas();
+
+        when(notaRepository.findAll()).thenReturn(retorno);
+
+        List<Nota> buscadas = this.notaService.buscaNotas();
+        assertEquals(retorno, buscadas);
+        assertNotNull(buscadas);
     }
 
     @Test
@@ -120,6 +132,12 @@ public class NotaServiceTest {
                .notaTotal(6.0)
                .date(LocalDate.now()).build();
     }
-
+    public List<Nota> listNotas() {
+        return Arrays.asList(
+                notaEntity(),
+                notaEntity(),
+                notaEntity()
+        );
+    }
 
 }

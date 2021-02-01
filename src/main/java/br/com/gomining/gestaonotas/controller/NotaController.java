@@ -30,7 +30,7 @@ public class NotaController {
     }
 
     @GetMapping
-    @ApiOperation("Pega todas as notas")
+    @ApiOperation("Busca todas as notas")
     public List<Nota> buscaNotas() {
         return this.notaService.buscaNotas();
     }

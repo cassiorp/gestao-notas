@@ -41,7 +41,7 @@ public class AlunoServiceTest {
     @Test
     @DisplayName("Deve Criar Aluno")
     public void deveCriarAlunoDTO() {
-        Aluno retorno = Aluno.builder().nome("Cássio").build();
+        Aluno retorno = alunoEntity();
 
         AlunoDTO alunoDTO = new AlunoDTO("Cássio");
 
@@ -55,7 +55,6 @@ public class AlunoServiceTest {
     @Test
     @DisplayName("Deve Buscar Todos Alunos")
     public void deveBuscarTodosAlunos() {
-
         List<Aluno> alunosRetorno = listAlunos();
 
         when(alunoRepository.findAll()).thenReturn(alunosRetorno);
@@ -68,8 +67,7 @@ public class AlunoServiceTest {
     @Test
     @DisplayName("Deve Buscar Aluno Por ID")
     public void deveBuscarAlunoPorId() {
-
-        Aluno retorno = Aluno.builder().nome("Cássio").build();
+        Aluno retorno = alunoEntity();
 
         when(alunoRepository.findById("id")).thenReturn(java.util.Optional.ofNullable(retorno));
 
@@ -85,7 +83,7 @@ public class AlunoServiceTest {
         NomeDTO nomeDTO = new NomeDTO();
         nomeDTO.setNome("novo nome");
 
-        Aluno retorno = Aluno.builder().id("id").nome(nomeDTO.getNome()).build();
+        Aluno retorno = alunoEntity();
 
         when(alunoRepository.findById("id")).thenReturn(Optional.ofNullable((retorno)));
         when(alunoRepository.save(any(Aluno.class))).thenReturn(retorno);
@@ -106,7 +104,7 @@ public class AlunoServiceTest {
     @Test
     @DisplayName("Deve Deletar Aluno Por ID")
     public void deveDeletarAlunoPorID() {
-        Aluno retorno = Aluno.builder().id("id").nome("Cássio").build();
+        Aluno retorno = alunoEntity();
 
         when(alunoRepository.findById("id")).thenReturn(Optional.ofNullable(retorno));
         this.alunoService.deletaAluno("id");
@@ -115,6 +113,9 @@ public class AlunoServiceTest {
     }
 
 
+    public Aluno alunoEntity(){
+        return Aluno.builder().id("id").nome("Cássio").build();
+    }
     public List<Aluno> listAlunos() {
         return Arrays.asList(
                 Aluno.builder().nome("Cássio").build(),

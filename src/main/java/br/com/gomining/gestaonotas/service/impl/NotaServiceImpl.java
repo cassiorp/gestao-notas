@@ -22,6 +22,8 @@ public class NotaServiceImpl implements NotaService {
     private final NotaRepository notaRepository;
     private final AlunoService alunoService;
 
+
+    private final String NOTA_NAO_ENCONTRADA = "Nota não encontrada";
     private final Double MEDIA = 6.0;
 
 
@@ -52,7 +54,7 @@ public class NotaServiceImpl implements NotaService {
     @Override
     public Nota buscaNotaPorID(String id) {
         Nota nota = this.notaRepository.findById(id)
-                .orElseThrow(() -> new NotaNotFoundException("Nota não encontrada"));
+                .orElseThrow(() -> new NotaNotFoundException(NOTA_NAO_ENCONTRADA));
         return nota;
     }
 
@@ -82,7 +84,7 @@ public class NotaServiceImpl implements NotaService {
         return  aluno.getBoletim().stream()
                 .filter(n -> n.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new NotaNotFoundException("Nota não encontrada"));
+                .orElseThrow(() -> new NotaNotFoundException(NOTA_NAO_ENCONTRADA));
     }
 
     public Situacao getSituacao(Double nota) {
