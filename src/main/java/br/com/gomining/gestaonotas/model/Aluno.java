@@ -33,10 +33,4 @@ public class Aluno {
         this.boletim.add(nota);
     }
 
-    public void setBoletim(List<Nota> notas) {
-        this.boletim.removeAll(boletim);
-        this.boletim.addAll(notas);
-    }
-
-
 }

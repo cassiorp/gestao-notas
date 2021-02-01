@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(SpringExtension.class)
-public class AlunoServiceImplTest {
+public class AlunoServiceTest {
 
     AlunoService alunoService;
 

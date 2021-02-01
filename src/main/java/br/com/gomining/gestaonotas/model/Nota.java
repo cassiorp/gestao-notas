@@ -33,7 +33,6 @@ public class Nota {
     private LocalDate date;
 
     @Builder
-
     public Nota(String id, String disciplina, String nomeAluno, Double notaTotal, Situacao situacao, LocalDate date) {
         this.id = id;
         this.disciplina = disciplina;
@@ -42,4 +41,5 @@ public class Nota {
         this.situacao = situacao;
         this.date = date;
     }
+
 }

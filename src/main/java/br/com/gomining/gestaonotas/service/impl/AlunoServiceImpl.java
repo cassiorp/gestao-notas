@@ -63,11 +63,5 @@ public class AlunoServiceImpl implements AlunoService {
         return false;
     }
 
-    public Nota buscaNotaNoBoletin(Aluno aluno, String id) {
-        return  aluno.getBoletim().stream()
-                .filter(n -> n.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new NotaNotFoundException("Nota não encontrada"));
-    }
 
 }

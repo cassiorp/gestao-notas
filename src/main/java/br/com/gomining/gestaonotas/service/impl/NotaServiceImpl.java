@@ -7,9 +7,12 @@ import br.com.gomining.gestaonotas.model.Aluno;
 import br.com.gomining.gestaonotas.model.Enum.Situacao;
 import br.com.gomining.gestaonotas.model.Nota;
 import br.com.gomining.gestaonotas.repository.NotaRepository;
+import br.com.gomining.gestaonotas.service.AlunoService;
 import br.com.gomining.gestaonotas.service.NotaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -17,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class NotaServiceImpl implements NotaService {
 
     private final NotaRepository notaRepository;
-    private final AlunoServiceImpl alunoServiceImpl;
+    private final AlunoService alunoService;
 
     private final Double MEDIA = 6.0;
 
@@ -25,7 +28,7 @@ public class NotaServiceImpl implements NotaService {
     @Override
     public Nota salvaNota(String idAluno, NotaDTO notaDTO) {
 
-        Aluno aluno = alunoServiceImpl.buscaAlunoPorId(idAluno);
+        Aluno aluno = alunoService.buscaAlunoPorId(idAluno);
 
         Nota nota = Nota.builder()
                 .disciplina(notaDTO.getDisciplina())
@@ -37,8 +40,13 @@ public class NotaServiceImpl implements NotaService {
 
         aluno.setBoletim(nota);
         this.notaRepository.save(nota);
-        this.alunoServiceImpl.salvaAluno(aluno);
+        this.alunoService.salvaAluno(aluno);
         return nota;
+    }
+
+    @Override
+    public List<Nota> buscaNotas() {
+        return this.notaRepository.findAll();
     }
 
     @Override
@@ -50,8 +58,8 @@ public class NotaServiceImpl implements NotaService {
 
     @Override
     public Nota editaNotaTotal(String idAluno, NotaTotalDTO notaTotalDTO) {
-        Aluno aluno = this.alunoServiceImpl.buscaAlunoPorId(idAluno);
-        Nota nota = this.alunoServiceImpl.buscaNotaNoBoletin(aluno, notaTotalDTO.getId());
+        Aluno aluno = this.alunoService.buscaAlunoPorId(idAluno);
+        Nota nota = buscaNotaNoBoletin(aluno, notaTotalDTO.getId());
         aluno.getBoletim().remove(nota);
 
         nota.setNotaTotal(notaTotalDTO.getNotaTotal());
@@ -59,11 +67,10 @@ public class NotaServiceImpl implements NotaService {
         this.notaRepository.save(nota);
 
         aluno.setBoletim(nota);
-        this.alunoServiceImpl.salvaAluno(aluno);
+        this.alunoService.salvaAluno(aluno);
 
         return nota;
     }
-
 
     @Override
     public void deletaNota(String id) {
@@ -71,8 +78,16 @@ public class NotaServiceImpl implements NotaService {
         this.notaRepository.deleteById(id);
     }
 
+    public Nota buscaNotaNoBoletin(Aluno aluno, String id) {
+        return  aluno.getBoletim().stream()
+                .filter(n -> n.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new NotaNotFoundException("Nota não encontrada"));
+    }
+
     public Situacao getSituacao(Double nota) {
         if(nota >= 6.0) return Situacao.APROVADO;
         else return Situacao.REPROVADO;
     }
+
 }

@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(SpringExtension.class)
-public class NotaServiceImplTest {
+public class NotaServiceTest {
 
     NotaService notaService;
 

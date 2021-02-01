@@ -4,33 +4,47 @@ import br.com.gomining.gestaonotas.dto.NotaDTO;
 import br.com.gomining.gestaonotas.dto.NotaTotalDTO;
 import br.com.gomining.gestaonotas.model.Nota;
 import br.com.gomining.gestaonotas.service.NotaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/notas")
 @RequiredArgsConstructor
+@Api("API Gestão de Notas - Notas")
+@CrossOrigin("*")
 public class NotaController {
 
     private final NotaService notaService;
 
-    @PostMapping("/{idCliente}")
+    @PostMapping("/{idAluno}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Nota salvaNota(@PathVariable @Valid String idCliente, @RequestBody @Valid NotaDTO notaDTO) {
-        return this.notaService.salvaNota(idCliente, notaDTO);
+    @ApiOperation("Adiciona uma nota ao boletim do aluno, referenciado pelo ID")
+    public Nota salvaNota(@PathVariable @Valid String idAluno, @RequestBody @Valid NotaDTO notaDTO) {
+        return this.notaService.salvaNota(idAluno, notaDTO);
     }
 
-    @PatchMapping("/{id}")
-    public Nota editaNotaTotal(@PathVariable @Valid String id, @RequestBody @Valid NotaTotalDTO notaTotalDTO) {
-        return this.notaService.editaNotaTotal(id, notaTotalDTO);
+    @GetMapping
+    @ApiOperation("Pega todas as notas")
+    public List<Nota> buscaNotas() {
+        return this.notaService.buscaNotas();
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteNota(@PathVariable @Valid String id) {
-        this.notaService.deletaNota(id);
+    @PatchMapping("/{idAluno}")
+    @ApiOperation("Edita valor da nota final de um aluno, referenciado pelo ID")
+    public Nota editaNotaTotal(@PathVariable @Valid String idAluno, @RequestBody @Valid NotaTotalDTO notaTotalDTO) {
+        return this.notaService.editaNotaTotal(idAluno, notaTotalDTO);
+    }
+
+    @DeleteMapping("/{idAluno}")
+    @ApiOperation("Exclui uma nota do boletim do aluno, referenciado pelo ID.")
+    public void deleteNota(@PathVariable @Valid String idAluno) {
+        this.notaService.deletaNota(idAluno);
     }
 
 }
