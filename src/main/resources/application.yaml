@@ -3,22 +3,22 @@ server:
 
 spring:
   profiles:
-    active: prod
+    active: dev
 
 ---
 
 spring:
-  profile: prod
-    data:
-      mongodb:
-        uri: 'mongodb+srv://admin:QWbXinIPMzl4tDWO@cluster1.sxrjt.mongodb.net/whatsapp-mern?retryWrites=true&w=majority'
+  profiles: prod
+  data:
+    mongodb:
+      uri: 'mongodb+srv://admin:QWbXinIPMzl4tDWO@cluster1.sxrjt.mongodb.net/whatsapp-mern?retryWrites=true&w=majority'
 
 ---
 
 spring:
-  profile: dev
-    data:
-      mongodb:
-        database: banco
-        host: localhost
-        port: 27017
+  profiles: dev
+  data:
+    mongodb:
+      database: banco
+      host: localhost
+      port: 27017
