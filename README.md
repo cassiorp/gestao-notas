@@ -16,6 +16,6 @@ Aqui esta a documentação feita com Swagger. Você pode além de ver os paths p
 
 - Rode o comando: **sudo docker-compose up** (Para esse comando você deve ter instalado o Docker e Docker Compose. Esse comando ira inicar um container com MongoDB.
 
-- Roda a Aplicação na IDE.
+- Rode a Aplicação na IDE.
 
 
