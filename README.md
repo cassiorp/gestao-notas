@@ -8,13 +8,15 @@ Aplicação para Gestão de Notas de Alunos
 
 Aqui esta a documentação feita com Swagger. Você pode além de ver os paths para os endpoints, também pode testar as requisições.
 
-### Teste Local com IDE 
+### Teste Local com a IDE 
 
 - Clone o repositorio
 
 - Entre no diretório do projeto: **cd gestao-notas**
 
 - Rode o comando: **sudo docker-compose up** (Para esse comando você deve ter instalado o Docker e Docker Compose. Esse comando ira inicar um container com MongoDB.
+
+- Entre no Arquivo de configurações: **application.yaml** e troque para o perfil para **dev**
 
 - Rode a Aplicação na IDE.
 
