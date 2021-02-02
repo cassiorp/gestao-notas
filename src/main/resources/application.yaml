@@ -5,5 +5,4 @@ server:
 spring:
   data:
     mongodb:
-      database: notasdb
-      host: mongodb
+      uri: 'mongodb+srv://admin:QWbXinIPMzl4tDWO@cluster1.sxrjt.mongodb.net/whatsapp-mern?retryWrites=true&w=majority'

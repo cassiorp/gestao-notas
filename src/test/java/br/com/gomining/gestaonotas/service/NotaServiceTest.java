@@ -102,17 +102,6 @@ public class NotaServiceTest {
     }
 
     @Test
-    @DisplayName("Deve Deletar Nota Por ID")
-    public void deveDeletarAlunoPorID() {
-        Nota notaRetorno = notaEntity();
-
-        when(notaRepository.findById("id")).thenReturn(Optional.ofNullable(notaRetorno));
-        this.notaService.deletaNota("id");
-
-        verify(notaRepository, times(1)).deleteById("id");
-    }
-
-    @Test
     @DisplayName("Deve Pegar Situacao Reprovado")
     public void devePegarSituacaReprovado() {
         Situacao situacao = this.notaService.getSituacao(5.9);

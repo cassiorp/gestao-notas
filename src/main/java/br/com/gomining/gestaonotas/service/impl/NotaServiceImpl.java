@@ -74,11 +74,6 @@ public class NotaServiceImpl implements NotaService {
         return nota;
     }
 
-    @Override
-    public void deletaNota(String id) {
-        buscaNotaPorID(id);
-        this.notaRepository.deleteById(id);
-    }
 
     public Nota buscaNotaNoBoletin(Aluno aluno, String id) {
         return  aluno.getBoletim().stream()

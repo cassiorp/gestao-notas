@@ -41,10 +41,4 @@ public class NotaController {
         return this.notaService.editaNotaTotal(idAluno, notaTotalDTO);
     }
 
-    @DeleteMapping("/{idAluno}")
-    @ApiOperation("Exclui uma nota do boletim do aluno, referenciado pelo ID.")
-    public void deleteNota(@PathVariable @Valid String idAluno) {
-        this.notaService.deletaNota(idAluno);
-    }
-
 }

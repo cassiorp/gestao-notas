@@ -14,6 +14,5 @@ public interface NotaService {
     List<Nota> buscaNotas();
     Nota buscaNotaPorID(String id);
     Nota editaNotaTotal(String idAluno, NotaTotalDTO notaTotalDTO);
-    void deletaNota(String id);
     Situacao getSituacao(Double nota);
 }
