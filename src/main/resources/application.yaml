@@ -1,8 +1,24 @@
 server:
   port: 8080
 
+spring:
+  profiles:
+    active: prod
+
+---
 
 spring:
-  data:
-    mongodb:
-      uri: 'mongodb+srv://admin:QWbXinIPMzl4tDWO@cluster1.sxrjt.mongodb.net/whatsapp-mern?retryWrites=true&w=majority'
+  profile: prod
+    data:
+      mongodb:
+        uri: 'mongodb+srv://admin:QWbXinIPMzl4tDWO@cluster1.sxrjt.mongodb.net/whatsapp-mern?retryWrites=true&w=majority'
+
+---
+
+spring:
+  profile: dev
+    data:
+      mongodb:
+        database: banco
+        host: localhost
+        port: 27017
